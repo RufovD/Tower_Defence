@@ -22,7 +22,7 @@ public:
 	std::vector<Road> create_roads();
 	Castle create_castle();
 	std::vector<double> create_monsters_time();
-	std::vector<std::vector<Monster>> create_monsters(); //вектор из векторв манстров, moster[0] - наземные, monster[1] - воздушные
+	std::vector<Monster> create_monsters();
 	int get_start_money();
 };
 

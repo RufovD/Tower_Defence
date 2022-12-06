@@ -92,11 +92,10 @@ std::vector<double> Level::create_monsters_time(){
 	return monsters_time;
 };
 
-std::vector<std::vector<Monster>> Level::create_monsters(){
+std::vector<Monster> Level::create_monsters() {
 	std::ifstream f(file_name);
 	std::vector<std::string> monsters_type;
-	std::vector<std::vector<Monster>> monsters;
-	monsters.resize(2);
+	std::vector<Monster> monsters;
 	int x0, y0;
 	std::string line, a = "qw";
 	if (f.is_open()) {
@@ -107,16 +106,18 @@ std::vector<std::vector<Monster>> Level::create_monsters(){
 		monsters_type = read_after_n_lines(3, line, f, a);
 		f.close();
 	};
+
+	std::string spider = "Spider";
+	std::string bat = "Bat";
+
 	for (int i = 0; i < monsters_type.size(); i++) {
-		std::string spider = "Spider";
-		std::string bat = "Bat";
 		if (monsters_type[i] == spider) {
 			Spider s(x0, y0);
-			monsters[0].push_back(s);
+			monsters.push_back(s);
 		}
 		else if (monsters_type[i] == bat) {
 			Bat b(x0, y0);
-			monsters[1].push_back(b);
+			monsters.push_back(b);
 		};
 	};
 	return monsters;
