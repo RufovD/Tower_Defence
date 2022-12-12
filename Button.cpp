@@ -1,14 +1,33 @@
 #include "Button.h"
 
-Button::Button(int x, int y, int level_number) : x(x), y(y), level_number(level_number), lenght_x(50), lenght_y(20), pressed(false) {}
+Button::Button(int x, int y, int width, int height, bool is_clickable, std::string& texture_file)
+{
+	this->x = x;
+	this->y = y;
+	this->width = width;
+	this->height = height;
+	this->is_clickable = is_clickable;
+	this->is_hovered = false;
+	this->is_pressed = false;
+	sf::Image image;
+	image.loadFromFile("Images/" + texture_file);
+	this->texture.loadFromImage(image);
+	this->sprite.setTexture(this->texture);
+	this->sprite.setTextureRect(sf::IntRect(x, y, width, height)); // ??? переделать 
+}
 
-bool Button::is_pressed(int click_x, int click_y) {
-	if ((x <= click_x) && (click_x <= x + lenght_x) && (y <= click_y) && (click_y <= y + lenght_y))
-		pressed = true;
-	return pressed;
-}; 
+void Button::update() {
+	if (is_clickable)
+		if (is_pressed)
+			sprite.setColor(sf::Color::Yellow);
+		else if (is_hovered)
+			sprite.setColor(sf::Color::Green);
+		else
+			sprite.setColor(sf::Color(255, 255, 255, 128)); //полупрозрачный
+	is_hovered = false;
+	is_pressed = false;
+}
 
-int Button::get_level_number() {
-	return level_number;
-};
-
+void Button::draw(sf::RenderWindow& window) {
+	window.draw(sprite);
+}

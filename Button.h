@@ -1,14 +1,21 @@
 #pragma once
-class Button
-{
-private:
-	int x, y, level_number; //координаты левого верхнего края, номер запускаемого уровня
-	int lenght_x, lenght_y; //длина по иксу, длина по игреку (есть способ сделать так, чтобы некоторое поле у всех представителей класса имело одно и только одно значение. надо посмотреть, как это сделать и применить к lenght)
-	bool pressed; //нажата ли кнопка
-public:
-	Button(int x, int y, int level); //по умолчанию кнопка не нажаты
-	bool is_pressed(int click_x, int click_y); //проверяет, нажата ли кнопка
-	int get_level_number(); //возвращает номер уровня
-	//void draw(); //рисует кнопку;
-};
 
+#include <SFML/Graphics.hpp>
+
+class Button /* : public sf::Drawable*/ { // ??? возникают проблемы с конструктором
+private:
+	sf::Texture texture;
+	sf::Sprite sprite;
+
+public:
+	int x, y; //координаты левого верхнего края
+	int width, height; //длина и ширина 
+	bool is_clickable; //можно ли нажать кнопку
+	bool is_hovered; //наведён ли курсор мыши на кнопку
+	bool is_pressed; //нажата ли кнопка
+
+	Button(int x, int y, int width, int height, bool is_clickable, std::string& texture_file);
+
+	void update();
+	void draw(sf::RenderWindow& window);
+};
