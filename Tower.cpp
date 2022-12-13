@@ -1,6 +1,6 @@
 #include "Tower.h"
 
-Tower::Tower(int x, int y, double reloading_time, int damage_radius, int damage_value): x(x), y(y), reloading_time(reloading_time), damage_radius(damage_radius), damage_value(damage_value), target(nullptr), is_loaded(true), cringe_time(0) {}
+Tower::Tower(int x, int y, double reloading_time, int damage_radius, int damage_value, int cost): x(x), y(y), reloading_time(reloading_time), damage_radius(damage_radius), damage_value(damage_value), cost(cost), target(nullptr), is_loaded(true), cringe_time(0) {}
 
 void Tower::choose_target(std::deque<Monster> active_monsters) {
 	if (target == nullptr) {

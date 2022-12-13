@@ -12,9 +12,10 @@ private:
 	int damage_radius;
 	int damage_value;
 	Monster* target;
+	int cost;
 
 public:
-	Tower(int x, int y, double reloading_time, int damage_radius, int damage_value);
+	Tower(int x, int y, double reloading_time, int damage_radius, int damage_value, int cost);
 	void choose_target(std::deque<Monster>);
 	void make_damage();
 	void target_check();
