@@ -3,7 +3,7 @@
 
 int main() {
 	Game game;
-	game.run_game();
+	game.run();
 	game.destroy(); // ??? зачем это нужно
 
 	return 0;
