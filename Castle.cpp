@@ -1,8 +1,8 @@
 #include "Castle.h"
 
-Castle::Castle(int hp) : hp(hp), is_alive(true) {}
+Castle::Castle(int x, int y) : hp(100), x(x), y(y), is_alive(true) {}
 
-void Castle::get_damage(Moster monster) {
+void Castle::get_damage(Monster monster) {
     hp -= monster.make_damage();
     if (hp <= 0)
         is_alive = false;

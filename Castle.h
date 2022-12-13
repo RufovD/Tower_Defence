@@ -1,13 +1,15 @@
 #pragma once
+#include "Monster.h"
+
 class Castle
 {
 private:
-    int hp;
+    int hp, x, y;
     bool is_alive;
 
 public:
-    Castle(int hp);
-    void get_damage(Moster monster);
+    Castle(int x, int y);
+    void get_damage(Monster monster);
     int get_hp();
     bool death();
 };

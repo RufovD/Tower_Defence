@@ -5,9 +5,9 @@ class Building_place
 {
 private:
     int x, y, r;
-    Building_place(int x, int y);
 
 public:
+    Building_place(int x, int y);
     int get_x();
     int get_y();
     int get_r();

@@ -19,5 +19,5 @@ bool Building_place::is_pressed(int click_x, int click_y) {
 };
 
 Building_menu Building_place::call_menu() {
-    return Building_menu(x, y - 5, Building_place * this);
+    return Building_menu(x, y - 5, this);
 };
