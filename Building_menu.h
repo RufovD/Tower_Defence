@@ -7,6 +7,8 @@ class Building_place;
 class Building_menu
 {
 private:
+    sf::Texture texture1, texture2, texture3;
+    sf::Sprite sprite1, sprite2, sprite3;
     Building_place* place;
     int x1, x2, x3, y1, y2, y3, r;
     int cost1, cost2, cost3;
