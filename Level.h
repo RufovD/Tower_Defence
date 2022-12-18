@@ -21,8 +21,8 @@ public:
 	std::deque<Building_place> create_building_places();
 	std::vector<Road> create_roads();
 	Castle create_castle();
-	std::vector<double> create_monsters_time();
+	std::vector<float> create_monsters_time();
 	std::vector<Monster> create_monsters();
-	int get_start_money();
+	int get_start_money();	
 };
 
