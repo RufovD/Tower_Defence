@@ -37,7 +37,7 @@ std::deque<Building_place> Level::create_building_places() {
 	return building_places;
 };
 
-std::vector<Road> Level::create_roads() {
+std::vector<Road> Level::create_roads(const sf::Texture& tex) {
 	std::ifstream f(file_name);
 	std::vector<Road> roads;
 	std::vector<int> x, y;
@@ -45,7 +45,7 @@ std::vector<Road> Level::create_roads() {
 	x = read_after_n_lines(5, line, f, 1);
 	y = read_after_n_lines(1, line, f, 1);
 	for (int i = 0; i < x.size() - 1; i++) {
-		Road r(x[i], y[i], x[i+1], y[i+1]);
+		Road r(tex, x[i], y[i], x[i+1], y[i+1]);
 		roads.push_back(r);
 	};
 	f.close();
