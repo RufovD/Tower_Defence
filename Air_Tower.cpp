@@ -1,3 +1,3 @@
 #include "Air_Tower.h"
-std::string a = "Air_Tower_sprite.png";
-Air_Tower::Air_Tower(int x, int y) : Tower(x, y, 1, 20, 25, 200, a) {};
+
+Air_Tower::Air_Tower(const sf::Texture& tex, int x, int y) : Tower(tex, x, y, 1, 20, 25, 200) {};

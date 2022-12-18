@@ -1,14 +1,10 @@
 #include "Tower.h"
 
-Tower::Tower(int x, int y, double reloading_time, int damage_radius, int damage_value, int cost, std::string& texture_file):
+Tower::Tower(const sf::Texture& tex, int x, int y, double reloading_time, int damage_radius, int damage_value, int cost):
 	x(x), y(y), reloading_time(reloading_time), damage_radius(damage_radius), damage_value(damage_value), cost(cost), 
 	target(nullptr), is_loaded(true), cringe_time(0) 
 {
-	sf::Image image;
-	image.loadFromFile("Images/" + texture_file);
-	this->texture.loadFromImage(image);
-	this->sprite.setTexture(this->texture);
-	this->sprite.setTextureRect(sf::IntRect(0, 0, 500, 500));
+	this->sprite.setTexture(tex);
 	this->sprite.setPosition(x, y);
 }
 

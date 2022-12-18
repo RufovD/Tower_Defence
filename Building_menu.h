@@ -18,9 +18,9 @@ public:
     bool first_pressed(int click_x, int click_y);
     bool second_pressed(int click_x, int click_y);
     bool third_pressed(int click_x, int click_y);
-    Ground_Tower build_ground_tower();
-    Air_Tower build_air_tower();
-    Uni_Tower build_uni_tower();
+    //Ground_Tower build_ground_tower();
+    //Air_Tower build_air_tower();
+    //Uni_Tower build_uni_tower();
     void draw(sf::RenderWindow& window);
 };
 

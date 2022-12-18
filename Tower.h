@@ -6,7 +6,6 @@
 class Tower
 {
 private:
-	sf::Texture texture;
 	sf::Sprite sprite;
 
 	int x, y;
@@ -19,7 +18,7 @@ private:
 	int cost;
 
 public:
-	Tower(int x, int y, double reloading_time, int damage_radius, int damage_value, int cost, std::string& texture_file);
+	Tower(const sf::Texture& tex, int x, int y, double reloading_time, int damage_radius, int damage_value, int cost);
 	void choose_target(std::deque<Monster>);
 	void make_damage();
 	void target_check();

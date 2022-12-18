@@ -21,7 +21,7 @@ std::vector<T> Level::read_after_n_lines(unsigned int n, std::string& line, std:
 	return x;
 };
 
-std::deque<Building_place> Level::create_building_places(const sf::Texture& tex, const sf::Texture& tex1, const sf::Texture& tex2, const sf::Texture& tex3) {
+std::deque<Building_place> Level::create_building_places(const sf::Texture& tex) {
 	std::ifstream f(file_name);
 	std::deque<Building_place> building_places;
 	std::vector<int> x, y;
@@ -29,7 +29,7 @@ std::deque<Building_place> Level::create_building_places(const sf::Texture& tex,
 	x = read_after_n_lines(1, line, f, 1);
 	y = read_after_n_lines(1, line, f, 1);
 	for (int i = 0; i < x.size(); i++) {
-		Building_place b(tex, tex1, tex2, tex3, x[i], y[i]);
+		Building_place b(tex, x[i], y[i]);
 		building_places.push_back(b);
 	};
 	f.close();
