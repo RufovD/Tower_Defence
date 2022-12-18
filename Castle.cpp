@@ -1,7 +1,7 @@
 #include "Castle.h"
 
 Castle::Castle(int x, int y) : hp(100), x(x), y(y), is_alive(true) {
-    std::string castle = "Castle_sprite.jpg";
+    std::string castle = "Castle_sprite.png";
     sf::Image image;
     image.loadFromFile("Images/" + castle);
     this->texture.loadFromImage(image);

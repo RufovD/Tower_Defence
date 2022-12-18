@@ -61,3 +61,10 @@ Uni_Tower Building_menu::build_uni_tower() {
     Uni_Tower uni_t(x, y);
     return uni_t;
 };
+
+void Building_menu::draw(sf::RenderWindow& window) {
+    window.draw(sprite1);
+    window.draw(sprite2);
+    window.draw(sprite3);
+}
+

@@ -1,7 +1,7 @@
 #include "Building_place.h"
 
 Building_place::Building_place(int x, int y) : x(x), y(y), r(2) {
-    std::string B_p = "Building_place_sprite.jpg";
+    std::string B_p = "Building_place_sprite.png";
     sf::Image image;
     image.loadFromFile("Images/" + B_p);
     this->texture.loadFromImage(image);

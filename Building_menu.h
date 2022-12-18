@@ -22,5 +22,6 @@ public:
     Ground_Tower build_ground_tower();
     Air_Tower build_air_tower();
     Uni_Tower build_uni_tower();
+    void draw(sf::RenderWindow& window);
 };
 
