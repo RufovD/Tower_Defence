@@ -8,19 +8,19 @@ Tower::Tower(const sf::Texture& tex, int x, int y, double reloading_time, int da
 	this->sprite.setPosition(x, y);
 }
 
-void Tower::choose_target(std::deque<Monster> active_monsters) {
+void Tower::choose_target(std::deque<Monster*> &active_monsters) {
 	if (target == nullptr) {
 		int index_of_nearset_monster = -1;
 		int distance = damage_radius;
 		for (int i = 0; i < active_monsters.size(); i++) {
-			double r = (x - active_monsters[i].get_x()) * (x - active_monsters[i].get_x()) + (y - active_monsters[i].get_y()) * (y - active_monsters[i].get_y());
+			double r = (x - (*(active_monsters[i])).get_x()) * (x - (*(active_monsters[i])).get_x()) + (y - (*(active_monsters[i])).get_y()) * (y - (*(active_monsters[i])).get_y());
 			if (r <= distance * distance) {
 				index_of_nearset_monster = i;
 				distance = r;
 			};
 		};
 		if (index_of_nearset_monster != -1)
-			target = &(active_monsters[index_of_nearset_monster]);
+			target = active_monsters[index_of_nearset_monster];
 	};
 }
 

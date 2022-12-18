@@ -19,7 +19,7 @@ private:
 
 public:
 	Tower(const sf::Texture& tex, int x, int y, double reloading_time, int damage_radius, int damage_value, int cost);
-	void choose_target(std::deque<Monster>);
+	void choose_target(std::deque<Monster*>& active_monsters);
 	void make_damage();
 	void target_check();
 	void reloading(double time); 
