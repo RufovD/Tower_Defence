@@ -4,7 +4,7 @@
 
 void Game::init_variables() {
 	is_main_menu = true;
-	curr_level = NULL;
+	curr_level = "null";
 }
 
 void Game::init_window() {
@@ -23,7 +23,7 @@ void Game::run_main_menu(sf::RenderWindow& window) {
 	std::string texture_file1 = "button_level_1.jpg";
 	std::string level_file1 = "level_1.txt";
 	std::vector<Button> buttons;
-	Button button1(0, 0, 200, 120, true, file1, level_file1); //заглушка
+	Button button1(0, 0, 200, 120, true, texture_file1, level_file1); //заглушка
 	int mouse_x = 0;
 	int mouse_y = 0;
 
@@ -62,7 +62,7 @@ void Game::run_main_menu(sf::RenderWindow& window) {
 	}
 }
 
-void Game::run_level(std::string level_file) {
+void Game::run_level(std::string &level_file) {
 	while (true) {
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -70,7 +70,11 @@ void Game::run_level(std::string level_file) {
 				window.close();
 				break;
 			}
+
 		std::cout << "Level is running" << std::endl;
+
+		window.clear();
+		window.display();
 	}
 }
 
