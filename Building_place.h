@@ -1,9 +1,12 @@
 #pragma once
 #include "Building_menu.h"
+#include <SFML/Graphics.hpp>
 
 class Building_place
 {
 private:
+    sf::Texture texture;
+    sf::Sprite sprite;
     int x, y, r;
 
 public:
@@ -13,5 +16,6 @@ public:
     int get_r();
     bool is_pressed(int click_x, int click_y);
     Building_menu call_menu();
+    void draw(sf::RenderWindow& window);
 };
 
