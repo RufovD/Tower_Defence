@@ -21,7 +21,7 @@ void Game::run() {
 
 // ??? переделать
 void Game::run_main_menu(sf::RenderWindow& window) {
-	std::string texture_file1 = "button_level_1.jpg";
+	std::string texture_file1 = "button.jpg";
 	std::string level_file1 = "Levels/level_1.txt";
 	std::vector<Button> buttons;
 	Button button1(0, 0, 200, 120, true, texture_file1, level_file1); //заглушка
@@ -65,16 +65,32 @@ void Game::run_main_menu(sf::RenderWindow& window) {
 
 void Game::run_level(std::string &level_file) {
 	Level level(level_file);
-	std::deque<Building_place> building_places = level.create_building_places();
-	std::vector<Road> roads = level.create_roads();
-	Castle castle = level.create_castle();
+
+	sf::Texture b_place_texture, b_menu_ground_texture, b_menu_air_texture, b_menu_uni_texture,
+				ground_tower_texture, air_tower_texture, uni_tower_texture, bat_texture, 
+				spider_texture, road_texture, castle_texture, grass_texture, money_texture;
+	b_place_texture.loadFromFile("Images/building_place.png");
+	b_menu_ground_texture.loadFromFile("Images/building_menu_ground.png");
+	b_menu_air_texture.loadFromFile("Images/building_menu_air.png");
+	b_menu_uni_texture.loadFromFile("Images/building_menu_uni.png");
+	ground_tower_texture.loadFromFile("Images/ground_tower.png");
+	air_tower_texture.loadFromFile("Images/air_tower.png");
+	uni_tower_texture.loadFromFile("Images/uni_tower.png");
+	bat_texture.loadFromFile("Images/bat.png");
+	spider_texture.loadFromFile("Images/spider.png");
+	road_texture.loadFromFile("Images/road.jpg");
+	castle_texture.loadFromFile("Images/castle.png");
+	grass_texture.loadFromFile("Images/grass.png");
+	money_texture.loadFromFile("Images/money.png");
+
+	std::deque<Building_place> building_places = level.create_building_places(b_place_texture);
+	std::vector<Road> roads = level.create_roads(road_texture);
+	Castle castle = level.create_castle(castle_texture);
 	std::vector<float> monsters_time = level.create_monsters_time();
 	std::vector<Monster> monsters = level.create_monsters();
+
 	int money = level.get_start_money();
 
-	//Создание спрайта травы
-	sf::Texture grass_texture;
-	grass_texture.loadFromFile("Images/Grass_sprite.png");
 	grass_texture.setRepeated(true);
 	sf::Sprite grass_sprite;
 	grass_sprite.setTexture(grass_texture);
@@ -100,7 +116,14 @@ void Game::run_level(std::string &level_file) {
 
 		window.clear();
 
+		//Рендеринг спрайтов
 		window.draw(grass_sprite);
+		for (Road road : roads)
+			road.draw(window);
+		castle.draw(window);
+		for (Building_place b_place : building_places)
+			b_place.draw(window);
+
 
 		window.display();
 	}
