@@ -1,0 +1,14 @@
+1) x_buiding_places:
+300
+2) y_buiding_places:
+470
+3) x_roads:
+0 700
+4) y_roads:
+500 500
+5) monsters_time: (в секундах)
+3 10
+6) monsters_type:
+Spider Bat 
+7) start_money:
+500
