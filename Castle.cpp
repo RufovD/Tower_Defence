@@ -1,12 +1,7 @@
 #include "Castle.h"
 
-Castle::Castle(int x, int y) : hp(100), x(x), y(y), is_alive(true) {
-    std::string castle = "Castle_sprite.png";
-    sf::Image image;
-    image.loadFromFile("Images/" + castle);
-    this->texture.loadFromImage(image);
-    this->sprite.setTexture(this->texture);
-    this->sprite.setTextureRect(sf::IntRect(0, 0, 465, 500));
+Castle::Castle(const sf::Texture& tex, int x, int y) : hp(100), x(x), y(y), is_alive(true) {
+    this->sprite.setTexture(tex);
     this->sprite.setPosition(x, y);
 }
 

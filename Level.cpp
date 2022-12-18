@@ -21,7 +21,7 @@ std::vector<T> Level::read_after_n_lines(unsigned int n, std::string& line, std:
 	return x;
 };
 
-std::deque<Building_place> Level::create_building_places() {
+std::deque<Building_place> Level::create_building_places(const sf::Texture& tex, const sf::Texture& tex1, const sf::Texture& tex2, const sf::Texture& tex3) {
 	std::ifstream f(file_name);
 	std::deque<Building_place> building_places;
 	std::vector<int> x, y;
@@ -29,7 +29,7 @@ std::deque<Building_place> Level::create_building_places() {
 	x = read_after_n_lines(1, line, f, 1);
 	y = read_after_n_lines(1, line, f, 1);
 	for (int i = 0; i < x.size(); i++) {
-		Building_place b(x[i], y[i]);
+		Building_place b(tex, tex1, tex2, tex3, x[i], y[i]);
 		building_places.push_back(b);
 	};
 	f.close();
@@ -53,13 +53,13 @@ std::vector<Road> Level::create_roads(const sf::Texture& tex) {
 	return roads;
 };
 
-Castle Level::create_castle() {
+Castle Level::create_castle(const sf::Texture& tex) {
 	std::ifstream f(file_name);
 	std::vector<int> x, y;
 	std::string line;
 	x = read_after_n_lines(5, line, f, 1);
 	y = read_after_n_lines(1, line, f, 1);
-	Castle c(x[x.size() - 1], y[y.size() - 1]);
+	Castle c(tex, x[x.size() - 1], y[y.size() - 1]);
 	f.close();
 
 	return c; //единственное, что возвращаем в ифе

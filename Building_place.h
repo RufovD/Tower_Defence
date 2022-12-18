@@ -5,17 +5,17 @@
 class Building_place
 {
 private:
-    sf::Texture texture;
+    sf::Texture tex1, tex2, tex3;
     sf::Sprite sprite;
     int x, y, r;
 
 public:
-    Building_place(int x, int y);
+    Building_place(const sf::Texture& tex, const sf::Texture& tex1, const sf::Texture& tex2, const sf::Texture& tex3, int x, int y);
     int get_x();
     int get_y();
     int get_r();
     bool is_pressed(int click_x, int click_y);
-    Building_menu call_menu();
+    Building_menu call_menu(const sf::Texture& tex1, const sf::Texture& tex2, const sf::Texture& tex3);
     void draw(sf::RenderWindow& window);
 };
 
