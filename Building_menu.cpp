@@ -1,9 +1,10 @@
 #include "Building_menu.h"
+#include "Building_place.h"
 #include "Ground_Tower.h"
 #include "Air_Tower.h"
 #include "Uni_Tower.h"
 
-Building_menu::Building_menu(int x2, int y2, Building_place* place) : x2(x2), y2(y2), x1(x2 - 3), x3(x2 + 3), y1(y2 - 1), y3(y3 + 1), r(1), cost1(200), cost2(200), cost3(500), place(place) {};
+Building_menu::Building_menu(int x2, int y2, Building_place* place) : x2(x2), y2(y2), x1(x2 - 3), x3(x2 + 3), y1(y2 - 1), y3(y2 - 1), r(1), cost1(200), cost2(200), cost3(500), place(place) {};
 
 
 bool Building_menu::is_pressed(int x, int y, int click_x, int click_y) {
