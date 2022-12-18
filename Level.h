@@ -17,7 +17,7 @@ private:
 	void skip_lines(unsigned int n, std::string& line, std::ifstream& f); //пропустить n линий и считать следующую
 
 public:
-	Level(std::string file_name);
+	Level(std::string &file_name);
 	std::deque<Building_place> create_building_places();
 	std::vector<Road> create_roads();
 	Castle create_castle();

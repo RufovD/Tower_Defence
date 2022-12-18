@@ -2,7 +2,7 @@
 #include "Spider.h"
 #include "Bat.h"
 
-Level::Level(std::string file_name) : file_name(file_name) {}
+Level::Level(std::string &file_name) : file_name(file_name) {}
 
 void Level::skip_lines(unsigned int n, std::string& line, std::ifstream& f) {
 	getline(f, line);
