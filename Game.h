@@ -16,9 +16,12 @@ private:
 
 	void init_variables(); // ??? инициализирует основные переменные игры (что? какие?) 
 	void init_window();
-	void run_main_menu(sf::RenderWindow& window);
+	void run_main_menu(sf::RenderWindow &window);
+	void run_level(std::string &level_file);
 
 public:
+	std::string curr_level; //запускаемый уровень
+
 	Game();
 
 	void run();

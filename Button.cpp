@@ -1,12 +1,14 @@
 #include "Button.h"
 
-Button::Button(int x, int y, int width, int height, bool is_clickable, std::string& texture_file)
+Button::Button(int x, int y, int width, int height, bool is_clickable,
+	           std::string &texture_file, std::string &level_file)
 {
 	this->x = x;
 	this->y = y;
 	this->width = width;
 	this->height = height;
 	this->is_clickable = is_clickable;
+	this->level_file = level_file;
 	this->is_hovered = false;
 	this->is_pressed = false;
 	sf::Image image;
