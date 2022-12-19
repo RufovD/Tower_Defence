@@ -26,7 +26,7 @@ public:
     int make_damage();
     int get_reward();
     bool is_near_castle;
-    //bool death();
+    bool death();
 
     void update_position(std::vector<Road>* roads, float time);
 

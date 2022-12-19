@@ -40,9 +40,9 @@ int Monster::get_reward() {
     return reward;
 };
 
-//bool Monster::death() {
-//    return !is_alive;
-//};
+bool Monster::death() {
+    return !is_alive;
+};
 
 bool Monster::movement(int start_const, int end_const, int start_x, int end_x, int c, int& x, int v, char d) {
     if ((c == start_const) && (c == end_const) && ((x >= start_x) && (x < end_x) || (x >= end_x) && (x < start_x))) {
