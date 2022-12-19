@@ -10,6 +10,7 @@ private:
 
 public:
     Building_place(const sf::Texture& tex, int x, int y);
+    bool operator==(Building_place& b_place) const;
     int get_x();
     int get_y();
     int get_r();

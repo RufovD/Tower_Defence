@@ -2,7 +2,7 @@
 
 Castle::Castle(const sf::Texture& tex, int x, int y) : hp(100), x(x), y(y), is_alive(true) {
     this->sprite.setTexture(tex);
-    this->sprite.setPosition(x, y);
+    this->sprite.setPosition(x - 85, y - 105);
 }
 
 void Castle::get_damage(Monster monster) {

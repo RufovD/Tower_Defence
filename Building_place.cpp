@@ -1,10 +1,18 @@
 #include "Building_place.h"
 
 Building_place::Building_place(const sf::Texture& tex, int x, int y) : 
-    x(x), y(y), r(2) {
+    x(x), y(y), r(30) {
     this->sprite.setTexture(tex);
-    this->sprite.setPosition(x, y);
+    this->sprite.setPosition(x - 41, y - 12);
 }
+
+bool Building_place::operator==(Building_place& b_place) const {
+    if ((x == b_place.get_x()) && (y == b_place.get_y()))
+        return true;
+    else
+        return false;
+}
+
 
 int Building_place::get_x() {
     return x;
@@ -19,7 +27,7 @@ int Building_place::get_r() {
 };
 
 bool Building_place::is_pressed(int click_x, int click_y) {
-    return (r * r >= (click_x - x) * (click_x - x) + (click_y - y) * (click_y - y));
+    return ((x - 41 <= click_x) && (click_x <= x + 40) && (y - 12 <= click_y) && (click_y <= click_y));
 };
 
 //Building_menu Building_place::call_menu(const sf::Texture& tex1, const sf::Texture& tex2, const sf::Texture& tex3) {
