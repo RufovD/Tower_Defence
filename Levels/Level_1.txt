@@ -1,13 +1,13 @@
 1) x_buiding_places:
-300
+600 600 220
 2) y_buiding_places:
-470
+370 750 750 
 3) x_roads:
-0 700
+0 700 700 100 100
 4) y_roads:
-500 500
+200 200 800 800 500
 5) monsters_time: (в секундах)
-3 10
+0 10
 6) monsters_type:
 Spider Bat 
 7) start_money:

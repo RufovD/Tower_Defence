@@ -2,12 +2,12 @@
 
 
 
-Monster::Monster(const sf::Texture& tex, char type, int hp, int v, int x, int y, int damage_value, int reward) : type(type), hp(hp), v(v), x(x), y(y), damage_value(damage_value),
+Monster::Monster(const sf::Texture& tex, char type, int hp, int v, int x, int y, int damage_value, int reward) : type(type), hp(hp), v(v), x(x - 28), y(y - 31), damage_value(damage_value),
 reward(reward), is_alive(true), direction('r') {
     this->is_near_castle = false;
     this->road_n = 1;
     this->sprite.setTexture(tex);
-    this->sprite.setPosition(x, y);
+    this->sprite.setPosition(x - 28, y - 31);
 }
 
 int Monster::get_hp() {
@@ -86,29 +86,29 @@ void Monster::update_position(std::vector<Road>* roads, float time) {
     switch (curr_road.get_direction()) {
     case 'u':
         y -= v * time;
-        if (y <= curr_road.get_end_y()) {
-            y = curr_road.get_end_y();
+        if (y <= curr_road.get_end_y() + 31) {
+            y = curr_road.get_end_y() + 31;
             road_n++;
         }
         break;
     case 'd':
         y += v * time;
-        if (y >= curr_road.get_end_y()) {
-            y = curr_road.get_end_y();
+        if (y >= curr_road.get_end_y() - 31) {
+            y = curr_road.get_end_y() - 31;
             road_n++;
         }
         break;
     case 'r':
         x += v * time;
-        if (x >= curr_road.get_end_x()) {
-            x = curr_road.get_end_x();
+        if (x >= curr_road.get_end_x() - 28) {
+            x = curr_road.get_end_x() - 28;
             road_n++;
         }
         break;
     case 'l':
         x -= v * time;
-        if (x <= curr_road.get_end_x()) {
-            x = curr_road.get_end_x();
+        if (x <= curr_road.get_end_x() - 28) {
+            x = curr_road.get_end_x() - 28;
             road_n++;
         }
         break;
