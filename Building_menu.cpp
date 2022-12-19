@@ -52,6 +52,10 @@ bool Building_menu::third_pressed(int click_x, int click_y) {
 //    return uni_t;
 //};
 
+Building_place* Building_menu::get_place(){
+    return place;
+}
+
 void Building_menu::draw(sf::RenderWindow& window) {
     window.draw(sprite1);
     window.draw(sprite2);
