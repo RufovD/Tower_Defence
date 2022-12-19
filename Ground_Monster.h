@@ -4,6 +4,6 @@ class Ground_Monster :
     public Monster
 {
 public:
-    Ground_Monster(int hp, int v, int x, int y, int damage_value, int money);
+    Ground_Monster(const sf::Texture& tex, int hp, int v, int x, int y, int damage_value, int money);
 };
 

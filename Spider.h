@@ -4,6 +4,6 @@ class Spider :
     public Ground_Monster
 {
 public:
-    Spider(int x, int y);
+    Spider(const sf::Texture& tex, int x, int y);
 };
 

@@ -87,7 +87,7 @@ std::vector<float> Level::create_monsters_time(){
 	return monsters_time;
 };
 
-std::vector<Monster> Level::create_monsters() {
+std::vector<Monster> Level::create_monsters(const sf::Texture& tex_spider, const sf::Texture& tex_bat) {
 	std::ifstream f(file_name);
 	std::vector<std::string> monsters_type;
 	std::vector<Monster> monsters;
@@ -104,11 +104,11 @@ std::vector<Monster> Level::create_monsters() {
 
 	for (int i = 0; i < monsters_type.size(); i++) {
 		if (monsters_type[i] == spider) {
-			Spider s(x0, y0);
+			Spider s(tex_spider, x0, y0);
 			monsters.push_back(s);
 		}
 		else if (monsters_type[i] == bat) {
-			Bat b(x0, y0);
+			Bat b(tex_bat, x0, y0);
 			monsters.push_back(b);
 		};
 	};
