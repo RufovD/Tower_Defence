@@ -5,7 +5,7 @@
 #include "Uni_Tower.h"
 
 Building_menu::Building_menu(const sf::Texture& tex1, const sf::Texture& tex2, const sf::Texture& tex3, int x, int y, Building_place* place) : 
-    x2(x - 34), y2(y - 95), x1(x - 75 - 34), x3(x + 75 - 34), y1(y - 85), y3(y - 85), r(1), cost1(200), cost2(200), cost3(500), place(place) {
+    x2(x - 34), y2(y - 95), x1(x - 75 - 34), x3(x + 75 - 34), y1(y - 85), y3(y - 85), r(34), cost1(200), cost2(200), cost3(500), place(place) {
     this->sprite1.setTexture(tex1);
     this->sprite2.setTexture(tex2);
     this->sprite3.setTexture(tex3);
@@ -20,15 +20,15 @@ bool Building_menu::is_pressed(int x, int y, int click_x, int click_y) {
 };
 
 bool Building_menu::first_pressed(int click_x, int click_y) {
-    return is_pressed(x1, y1, click_x, click_y);
+    return is_pressed(x1 + r, y1 + r, click_x, click_y);
 };
 
 bool Building_menu::second_pressed(int click_x, int click_y) {
-    return is_pressed(x2, y2, click_x, click_y);
+    return is_pressed(x2 + r, y2 + r, click_x, click_y);
 };
 
 bool Building_menu::third_pressed(int click_x, int click_y) {
-    return is_pressed(x3, y3, click_x, click_y);
+    return is_pressed(x3 + r, y3 + r, click_x, click_y);
 };
 
 //Ground_Tower Building_menu::build_ground_tower() {
