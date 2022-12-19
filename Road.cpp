@@ -1,11 +1,11 @@
 #include "Road.h"
 
-int Road::abs(int a) {
-    if (a >= 0)
-        return a;
-    else
-        return -a;
-}
+//int Road::abs(int a) {
+//    if (a >= 0)
+//        return a;
+//    else
+//        return -a;
+//}
 
 Road::Road(const sf::Texture& tex, int start_x, int start_y, int end_x, int end_y) : start_x(start_x), start_y(start_y),
         end_x(end_x), end_y(end_y)
@@ -17,7 +17,7 @@ Road::Road(const sf::Texture& tex, int start_x, int start_y, int end_x, int end_
     else
         y1 = 20;
     this->sprite.setPosition(start_x - x1, start_y - y1);
-    this->sprite.setTextureRect(sf::IntRect(512, 512, abs(end_x - start_x) + 2 * x1, abs(end_y - start_y) + 2 * y1));
+    this->sprite.setTextureRect(sf::IntRect(512, 512, end_x - start_x + 2 * x1, end_y - start_y + 2 * y1));
 }
 
 int Road::get_start_x() {

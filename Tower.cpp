@@ -5,7 +5,7 @@ Tower::Tower(const sf::Texture& tex, int x, int y, double reloading_time, int da
 	target(nullptr), is_loaded(true), cringe_time(0) 
 {
 	this->sprite.setTexture(tex);
-	this->sprite.setPosition(x, y);
+	this->sprite.setPosition(x - 47, y - 125);
 }
 
 void Tower::choose_target(std::deque<Monster*> &active_monsters) {
