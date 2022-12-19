@@ -4,7 +4,7 @@
 class Monster
 {
 private:
-
+    sf::Sprite sprite;
     int hp;
     char direction; //l, r, u, d
     bool is_alive;
@@ -15,7 +15,7 @@ private:
     bool movement(int start_const, int end_const, int start_x, int end_x, int c, int& x, int v, char d);
 
 public:
-    Monster(char type, int hp, int v, int x, int y, int damage_value, int money); 
+    Monster(const sf::Texture& tex, char type, int hp, int v, int x, int y, int damage_value, int money);
     int get_hp();
     char get_type();
     void get_damage(int damage_value);
@@ -25,5 +25,6 @@ public:
     int get_money();
     bool death();
     void go(Road* roads, unsigned int n); //указатель на массив дорог и число элементов массива
+    void draw(sf::RenderWindow& window);
 };
 
