@@ -1,6 +1,8 @@
 #include "Game.h"
 #include "Button.h"
 #include "Level.h"
+#include "Ground_Monster.h"
+#include "Air_Monster.h"
 
 
 void Game::init_variables() {
@@ -166,7 +168,7 @@ void Game::run_level(std::string &level_file) {
 			else if (b_menu_vec[0].third_pressed(mouse_x, mouse_y)) {
 				uni_towers.push_back(Uni_Tower(uni_tower_texture, b_menu_vec[0].get_place()->get_x(), b_menu_vec[0].get_place()->get_y()));
 				std::cout << "1" << std::endl;
-				for (int i = 0; i < size(building_places); i++)
+				for (int i = 0; i < building_places.size(); i++)
 					if (building_places[i] == b_menu_vec[0].get_place()) {
 						building_places.erase(building_places.begin() + i);
 						break;
@@ -189,22 +191,30 @@ void Game::run_level(std::string &level_file) {
 
 		window.clear();
 
+		//Обновление состояний монстров, башен, замка, денег
+		for (Monster* monster : active_ground) {
+			if (!monster->is_near_castle)
+				monster->update_position(&roads, elapsed_time);
+		}
+
+		for (Monster* monster : active_air) {
+			if (!monster->is_near_castle)
+				monster->update_position(&roads, elapsed_time);
+		}
+
 		//Отрисовка спрайтов
 		window.draw(grass_sprite);
-		for (Road road : roads)
-			road.draw(window);
+		for (Road road : roads) road.draw(window);
 		castle.draw(window);
 		for (Building_place* place : building_places)
 			if (place != nullptr)
 				place->draw(window);
-		if (is_building_menu)
-			b_menu_vec[0].draw(window);
-		for (Ground_Tower tower : ground_towers)
-			tower.draw(window);
-		for (Air_Tower tower : air_towers)
-			tower.draw(window);
-		for (Uni_Tower tower : uni_towers)
-			tower.draw(window);
+		if (is_building_menu) b_menu_vec[0].draw(window);
+		for (Ground_Tower tower : ground_towers) tower.draw(window);
+		for (Air_Tower tower : air_towers) tower.draw(window);
+		for (Uni_Tower tower : uni_towers) tower.draw(window);
+		for (Monster* monster : active_ground) monster->draw(window);
+		for (Monster* monster : active_air) monster->draw(window);
 
 		window.display();
 	}
