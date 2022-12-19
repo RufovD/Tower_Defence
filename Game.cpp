@@ -5,6 +5,7 @@
 
 void Game::init_variables() {
 	is_main_menu = true;
+	is_building_menu = false;
 	curr_level = "null";
 }
 
@@ -65,6 +66,8 @@ void Game::run_main_menu(sf::RenderWindow& window) {
 
 void Game::run_level(std::string &level_file) {
 	Level level(level_file);
+	int money = level.get_start_money();
+	//Building_menu building_menu = ;
 
 	sf::Texture b_place_texture, b_menu_ground_texture, b_menu_air_texture, b_menu_uni_texture,
 				ground_tower_texture, air_tower_texture, uni_tower_texture, bat_texture, 
@@ -87,11 +90,12 @@ void Game::run_level(std::string &level_file) {
 	std::vector<Road> roads = level.create_roads(road_texture);
 	Castle castle = level.create_castle(castle_texture);
 	std::vector<float> monsters_time = level.create_monsters_time(); //моменты появлений монстров в уровне
-	std::vector<Monster> monsters = level.create_monsters(); //все монстры, которые должны появиться в уровне
+	std::vector<Monster> monsters = level.create_monsters(spider_texture, bat_texture); //все монстры, которые должны появиться в уровне
 	std::deque<Monster*> active_ground; //дека из указателей на активных (рисуемых) наземных монстров
 	std::deque<Monster*> active_air; //дека из указателей на активных (рисуемых) наземных монстров
-
-	int money = level.get_start_money();
+	std::vector<Ground_Tower> ground_towers;
+	std::vector<Air_Tower> air_towers;
+	std::vector<Uni_Tower> uni_towers;
 
 	grass_texture.setRepeated(true);
 	sf::Sprite grass_sprite;
@@ -102,12 +106,16 @@ void Game::run_level(std::string &level_file) {
 	float time = 0.f; //время, прошедшее с начала игры
 	int curr_monster = 0; //количество вышедших монстров
 
+	int mouse_x = 0;
+	int mouse_y = 0;
+	std::vector<Building_menu> b_menu_vec; //??? переделать
+
 	while (window.isOpen()) {
 		sf::Time elapsed = clock.restart();
 		float elapsed_time = elapsed.asSeconds(); //время, прошедшее за один цикл
 		time += elapsed_time;
 
-		if (time > monsters_time[curr_monster]) {
+		if (curr_monster < monsters.size() && time > monsters_time[curr_monster]) {
 			switch (monsters[curr_monster].get_type()) {
 			case 'g': //Ground_monster
 				active_ground.push_back(&monsters[curr_monster]);
@@ -125,19 +133,49 @@ void Game::run_level(std::string &level_file) {
 				window.close();
 			}
 		
+		sf::Vector2i position = sf::Mouse::getPosition(window);
+		mouse_x = position.x;
+		mouse_y = position.y;
+		std::cout << mouse_x << " " << mouse_y << std::endl;
 
+		if (is_building_menu && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+			std::cout << "fuock youu" << std::endl;
+			if (b_menu_vec[0].first_pressed(mouse_x, mouse_y)) {
+				ground_towers.push_back(Ground_Tower(ground_tower_texture, 0, 0));
+				//надо удалить билдинг плейс
+			}
+			else if (b_menu_vec[0].second_pressed(mouse_x, mouse_y)) {
+				air_towers.push_back(Air_Tower(air_tower_texture, 0, 0));
+				//надо удалить билдинг плейс
+			}
+			else if (b_menu_vec[0].third_pressed(mouse_x, mouse_y)) {
+				uni_towers.push_back(Uni_Tower(uni_tower_texture, 0, 0));
+				//надо удалить билдинг плейс
+			}
+			b_menu_vec.pop_back();
+			is_building_menu = false;
+		}
 
-		std::cout << "Level is running " << std::endl;
+		if (!is_building_menu && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			for (Building_place b_place : building_places)
+				if (b_place.is_pressed(mouse_x, mouse_y)) {
+					is_building_menu = true;
+					//??? переделать
+					b_menu_vec.push_back(Building_menu(b_menu_ground_texture, b_menu_air_texture, b_menu_uni_texture, b_place.get_x(), b_place.get_y(), &b_place));
+					break;
+				}
 
 		window.clear();
 
-		//Рендеринг спрайтов
+		//Отрисовка спрайтов
 		window.draw(grass_sprite);
 		for (Road road : roads)
 			road.draw(window);
 		castle.draw(window);
 		for (Building_place b_place : building_places)
 			b_place.draw(window);
+		if (is_building_menu)
+			b_menu_vec[0].draw(window);
 
 
 		window.display();

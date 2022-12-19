@@ -13,6 +13,7 @@ private:
 	sf::RenderWindow window;
 	sf::VideoMode video_mode;
 	bool is_main_menu; //запущено ли главное меню
+	bool is_building_menu; //запущено ли строительное меню
 
 	void init_variables(); // ??? инициализирует основные переменные игры (что? какие?) 
 	void init_window();
