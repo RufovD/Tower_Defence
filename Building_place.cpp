@@ -27,7 +27,7 @@ int Building_place::get_r() {
 };
 
 bool Building_place::is_pressed(int click_x, int click_y) {
-    return ((x - 41 <= click_x) && (click_x <= x + 40) && (y - 12 <= click_y) && (click_y <= click_y));
+    return ((x - 41 <= click_x) && (click_x <= x + 40) && (y - 12 <= click_y) && (click_y <= y + 11));
 };
 
 //Building_menu Building_place::call_menu(const sf::Texture& tex1, const sf::Texture& tex2, const sf::Texture& tex3) {
