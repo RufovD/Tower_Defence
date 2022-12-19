@@ -11,7 +11,7 @@ private:
 	int x, y;
 	bool is_loaded;
 	double reloading_time;
-	double cringe_time; //время, в течение кооторого пушка уже перезаряжается;
+	double cringe_time; //время, в течение которого пушка уже перезаряжается;
 	int damage_radius;
 	int damage_value;
 	Monster* target;

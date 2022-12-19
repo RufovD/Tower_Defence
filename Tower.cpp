@@ -25,7 +25,7 @@ void Tower::choose_target(std::deque<Monster*> &active_monsters) {
 }
 
 void Tower::make_damage() {
-	if (is_loaded == true) {
+	if (target != nullptr && is_loaded == true) {
 		target->get_damage(damage_value);
 		is_loaded = false;
 		cringe_time = 0;
