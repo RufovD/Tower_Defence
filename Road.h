@@ -16,6 +16,6 @@ public:
     int get_end_y();
     void draw(sf::RenderWindow& window);
     char get_direction();
-    //int abs(int a);
+    int abs(int a);
 };
 
