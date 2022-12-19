@@ -18,7 +18,7 @@ private:
 
 public:
 	Level(std::string &file_name);
-	std::deque<Building_place> create_building_places(const sf::Texture& tex);
+	std::deque<Building_place*> create_building_places(const sf::Texture& tex);
 	std::vector<Road> create_roads(const sf::Texture& tex);
 	Castle create_castle(const sf::Texture& tex);
 	std::vector<float> create_monsters_time();

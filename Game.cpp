@@ -86,7 +86,8 @@ void Game::run_level(std::string &level_file) {
 	grass_texture.loadFromFile("Images/grass.png");
 	money_texture.loadFromFile("Images/money.png");
 
-	std::deque<Building_place> building_places = level.create_building_places(b_place_texture);
+	//std::deque<Building_place> building_places = level.create_building_places(b_place_texture);
+	std::deque<Building_place*> building_places = level.create_building_places(b_place_texture);
 	std::vector<Road> roads = level.create_roads(road_texture);
 	Castle castle = level.create_castle(castle_texture);
 	std::vector<float> monsters_time = level.create_monsters_time(); //моменты появлений монстров в уровне
@@ -136,20 +137,22 @@ void Game::run_level(std::string &level_file) {
 		sf::Vector2i position = sf::Mouse::getPosition(window);
 		mouse_x = position.x;
 		mouse_y = position.y;
-		std::cout << mouse_x << " " << mouse_y << std::endl;
+		//std::cout << mouse_x << " " << mouse_y << std::endl;
 
 		if (is_building_menu && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			std::cout << "fuock youu" << std::endl;
+			//std::cout << "fuock youu" << std::endl;
 			if (b_menu_vec[0].first_pressed(mouse_x, mouse_y)) {
-				ground_towers.push_back(Ground_Tower(ground_tower_texture, 0, 0));
-				//надо удалить билдинг плейс
+				ground_towers.push_back(Ground_Tower(ground_tower_texture, b_menu_vec[0].get_place()->get_x(), b_menu_vec[0].get_place()->get_y()));
+				std::cout << "1" << std::endl;
+				delete b_menu_vec[0].get_place();
+				std::cout << "2" << std::endl;
 			}
 			else if (b_menu_vec[0].second_pressed(mouse_x, mouse_y)) {
-				air_towers.push_back(Air_Tower(air_tower_texture, 0, 0));
+				air_towers.push_back(Air_Tower(air_tower_texture, b_menu_vec[0].get_place()->get_x(), b_menu_vec[0].get_place()->get_y()));
 				//надо удалить билдинг плейс
 			}
 			else if (b_menu_vec[0].third_pressed(mouse_x, mouse_y)) {
-				uni_towers.push_back(Uni_Tower(uni_tower_texture, 0, 0));
+				uni_towers.push_back(Uni_Tower(uni_tower_texture, b_menu_vec[0].get_place()->get_x(), b_menu_vec[0].get_place()->get_y()));
 				//надо удалить билдинг плейс
 			}
 			b_menu_vec.pop_back();
@@ -157,11 +160,11 @@ void Game::run_level(std::string &level_file) {
 		}
 
 		if (!is_building_menu && sf::Mouse::isButtonPressed(sf::Mouse::Left))
-			for (Building_place b_place : building_places)
-				if (b_place.is_pressed(mouse_x, mouse_y)) {
+			for (Building_place* b_place : building_places)
+				if (b_place->is_pressed(mouse_x, mouse_y)) {
 					is_building_menu = true;
 					//??? переделать
-					b_menu_vec.push_back(Building_menu(b_menu_ground_texture, b_menu_air_texture, b_menu_uni_texture, b_place.get_x(), b_place.get_y(), &b_place));
+					b_menu_vec.push_back(Building_menu(b_menu_ground_texture, b_menu_air_texture, b_menu_uni_texture, b_place->get_x(), b_place->get_y(), b_place));
 					break;
 				}
 
@@ -172,8 +175,9 @@ void Game::run_level(std::string &level_file) {
 		for (Road road : roads)
 			road.draw(window);
 		castle.draw(window);
-		for (Building_place b_place : building_places)
-			b_place.draw(window);
+		for (Building_place* b_place : building_places)
+			if (b_place != nullptr)
+				b_place->draw(window);
 		if (is_building_menu)
 			b_menu_vec[0].draw(window);
 
