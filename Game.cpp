@@ -144,16 +144,35 @@ void Game::run_level(std::string &level_file) {
 			if (b_menu_vec[0].first_pressed(mouse_x, mouse_y)) {
 				ground_towers.push_back(Ground_Tower(ground_tower_texture, b_menu_vec[0].get_place()->get_x(), b_menu_vec[0].get_place()->get_y()));
 				std::cout << "1" << std::endl;
+				for (int i = 0; i < size(building_places); i++)
+					if (building_places[i] == b_menu_vec[0].get_place()) {
+						building_places.erase(building_places.begin() + i);
+						break;
+					}
 				delete b_menu_vec[0].get_place();
 				std::cout << "2" << std::endl;
 			}
 			else if (b_menu_vec[0].second_pressed(mouse_x, mouse_y)) {
 				air_towers.push_back(Air_Tower(air_tower_texture, b_menu_vec[0].get_place()->get_x(), b_menu_vec[0].get_place()->get_y()));
-				//надо удалить билдинг плейс
+				std::cout << "1" << std::endl;
+				for (int i = 0; i < size(building_places); i++)
+					if (building_places[i] == b_menu_vec[0].get_place()) {
+						building_places.erase(building_places.begin() + i);
+						break;
+					}
+				delete b_menu_vec[0].get_place();
+				std::cout << "2" << std::endl;
 			}
 			else if (b_menu_vec[0].third_pressed(mouse_x, mouse_y)) {
 				uni_towers.push_back(Uni_Tower(uni_tower_texture, b_menu_vec[0].get_place()->get_x(), b_menu_vec[0].get_place()->get_y()));
-				//надо удалить билдинг плейс
+				std::cout << "1" << std::endl;
+				for (int i = 0; i < size(building_places); i++)
+					if (building_places[i] == b_menu_vec[0].get_place()) {
+						building_places.erase(building_places.begin() + i);
+						break;
+					}
+				delete b_menu_vec[0].get_place();
+				std::cout << "2" << std::endl;
 			}
 			b_menu_vec.pop_back();
 			is_building_menu = false;
@@ -175,12 +194,17 @@ void Game::run_level(std::string &level_file) {
 		for (Road road : roads)
 			road.draw(window);
 		castle.draw(window);
-		for (Building_place* b_place : building_places)
-			if (b_place != nullptr)
-				b_place->draw(window);
+		for (Building_place* place : building_places)
+			if (place != nullptr)
+				place->draw(window);
 		if (is_building_menu)
 			b_menu_vec[0].draw(window);
-
+		for (Ground_Tower tower : ground_towers)
+			tower.draw(window);
+		for (Air_Tower tower : air_towers)
+			tower.draw(window);
+		for (Uni_Tower tower : uni_towers)
+			tower.draw(window);
 
 		window.display();
 	}
