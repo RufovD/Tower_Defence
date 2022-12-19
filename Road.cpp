@@ -11,8 +11,13 @@ Road::Road(const sf::Texture& tex, int start_x, int start_y, int end_x, int end_
         end_x(end_x), end_y(end_y)
 {
     this->sprite.setTexture(tex);
-    this->sprite.setPosition(start_x, start_y);
-    this->sprite.setTextureRect(sf::IntRect(0, 0, abs(end_x - start_x) + 40, abs(end_y - start_y) + 40));
+    int x1 = 0, y1 = 0;
+    if (end_x - start_x == 0)
+        x1 = 20;
+    else
+        y1 = 20;
+    this->sprite.setPosition(start_x - x1, start_y - y1);
+    this->sprite.setTextureRect(sf::IntRect(512, 512, abs(end_x - start_x) + 2 * x1, abs(end_y - start_y) + 2 * y1));
 }
 
 int Road::get_start_x() {
