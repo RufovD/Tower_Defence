@@ -2,8 +2,11 @@
 
 
 
-Monster::Monster(char type, int hp, int v, int x, int y, int damage_value, int money) : type(type), hp(hp), v(v), x(x), y(y), damage_value(damage_value), 
-money(money), is_alive(true), direction('r') {}
+Monster::Monster(const sf::Texture& tex, char type, int hp, int v, int x, int y, int damage_value, int money) : type(type), hp(hp), v(v), x(x), y(y), damage_value(damage_value),
+money(money), is_alive(true), direction('r') {
+    this->sprite.setTexture(tex);
+    this->sprite.setPosition(x, y);
+}
 
 int Monster::get_hp() {
     return hp;
@@ -75,3 +78,7 @@ void Monster::go(Road* roads, unsigned int n) {
             break;
     };
 };
+
+void Monster::draw(sf::RenderWindow& window) {
+    window.draw(sprite);
+}
