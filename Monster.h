@@ -4,16 +4,20 @@
 class Monster
 {
 private:
+
     int hp;
+    char direction; //l, r, u, d
     bool is_alive;
     int v, x, y;
     int damage_value;
     int money;
-    bool movement(int start_const, int end_const, int start_x, int end_x, int c, int& x, int v);
+    char type;
+    bool movement(int start_const, int end_const, int start_x, int end_x, int c, int& x, int v, char d);
 
 public:
-    Monster(int hp, int v, int x, int y, int damage_value, int money); 
+    Monster(char type, int hp, int v, int x, int y, int damage_value, int money); 
     int get_hp();
+    char get_type();
     void get_damage(int damage_value);
     int get_x();
     int get_y();
