@@ -18,6 +18,19 @@ Road::Road(const sf::Texture& tex, int start_x, int start_y, int end_x, int end_
         y1 = 20;
     this->sprite.setPosition(start_x - x1, start_y - y1);
     this->sprite.setTextureRect(sf::IntRect(512, 512, end_x - start_x + 2 * x1, end_y - start_y + 2 * y1));
+
+    if (start_x != end_x) {
+        if (start_x < end_x)
+            direction = 'r';
+        else
+            direction = 'l';
+    }
+    else {
+        if (start_y < end_y)
+            direction = 'd';
+        else
+            direction = 'u';
+    };
 }
 
 int Road::get_start_x() {
@@ -35,6 +48,10 @@ int Road::get_end_x() {
 int Road::get_end_y() {
     return end_y;
 };
+
+char Road::get_direction() {
+    return direction;
+}
 
 void Road::draw(sf::RenderWindow& window) {
     window.draw(sprite);
