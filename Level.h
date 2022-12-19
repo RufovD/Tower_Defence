@@ -22,7 +22,7 @@ public:
 	std::vector<Road> create_roads(const sf::Texture& tex);
 	Castle create_castle(const sf::Texture& tex);
 	std::vector<float> create_monsters_time();
-	std::vector<Monster> create_monsters();
+	std::vector<Monster> create_monsters(const sf::Texture& tex_spider, const sf::Texture& tex_bat);
 	int get_start_money();	
 };
 
