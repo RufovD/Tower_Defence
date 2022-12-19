@@ -4,8 +4,8 @@
 #include "Air_Tower.h"
 #include "Uni_Tower.h"
 
-Building_menu::Building_menu(const sf::Texture& tex1, const sf::Texture& tex2, const sf::Texture& tex3, int x2, int y2, Building_place* place) : 
-    x2(x2), y2(y2), x1(x2 - 3), x3(x2 + 3), y1(y2 - 1), y3(y2 - 1), r(1), cost1(200), cost2(200), cost3(500), place(place) {
+Building_menu::Building_menu(const sf::Texture& tex1, const sf::Texture& tex2, const sf::Texture& tex3, int x, int y, Building_place* place) : 
+    x2(x - 34), y2(y - 95), x1(x - 75 - 34), x3(x + 75 - 34), y1(y - 85), y3(y - 85), r(1), cost1(200), cost2(200), cost3(500), place(place) {
     this->sprite1.setTexture(tex1);
     this->sprite2.setTexture(tex2);
     this->sprite3.setTexture(tex3);
