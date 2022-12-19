@@ -86,8 +86,10 @@ void Game::run_level(std::string &level_file) {
 	std::deque<Building_place> building_places = level.create_building_places(b_place_texture);
 	std::vector<Road> roads = level.create_roads(road_texture);
 	Castle castle = level.create_castle(castle_texture);
-	std::vector<float> monsters_time = level.create_monsters_time();
-	std::vector<Monster> monsters = level.create_monsters();
+	std::vector<float> monsters_time = level.create_monsters_time(); //моменты появлений монстров в уровне
+	std::vector<Monster> monsters = level.create_monsters(); //все монстры, которые должны появиться в уровне
+	std::deque<Monster*> active_ground; //дека из указателей на активных (рисуемых) наземных монстров
+	std::deque<Monster*> active_air; //дека из указателей на активных (рисуемых) наземных монстров
 
 	int money = level.get_start_money();
 
@@ -98,18 +100,31 @@ void Game::run_level(std::string &level_file) {
 
 	sf::Clock clock;
 	float time = 0.f; //время, прошедшее с начала игры
+	int curr_monster = 0; //количество вышедших монстров
 
 	while (window.isOpen()) {
 		sf::Time elapsed = clock.restart();
 		float elapsed_time = elapsed.asSeconds(); //время, прошедшее за один цикл
 		time += elapsed_time;
 
+		if (time > monsters_time[curr_monster]) {
+			switch (monsters[curr_monster].get_type()) {
+			case 'g': //Ground_monster
+				active_ground.push_back(&monsters[curr_monster]);
+				break;
+			case 'a': //Air_monster
+				active_air.push_back(&monsters[curr_monster]);
+				break;
+			}
+			curr_monster++;
+		}
+
 		sf::Event event;
 		while (window.pollEvent(event))
 			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 				window.close();
 			}
-
+		
 
 
 		std::cout << "Level is running " << std::endl;
