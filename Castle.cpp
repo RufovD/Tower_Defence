@@ -21,4 +21,9 @@ bool Castle::death() {
 
 void Castle::draw(sf::RenderWindow& window) {
     window.draw(sprite);
+    sf::RectangleShape rectangle;
+    rectangle.setSize(sf::Vector2f(hp, 10));
+    rectangle.setFillColor(sf::Color::Blue);
+    rectangle.setPosition(x - 50, y - 120);
+    window.draw(rectangle);
 }
