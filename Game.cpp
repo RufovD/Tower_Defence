@@ -193,7 +193,7 @@ void Game::run_level(std::string &level_file) {
 
 		if (is_building_menu && sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			if (b_menu_vec[0].first_pressed(mouse_x, mouse_y)) {
-				if (ground_cost < money) {
+				if (ground_cost <= money) {
 					ground_towers.push_back(Ground_Tower(ground_tower_texture, b_menu_vec[0].get_place()->get_x(), b_menu_vec[0].get_place()->get_y()));
 					money -= ground_cost;
 					is_money_changed = true;
@@ -206,7 +206,7 @@ void Game::run_level(std::string &level_file) {
 				}
 			}
 			else if (b_menu_vec[0].second_pressed(mouse_x, mouse_y)) {
-				if (air_cost < money) {
+				if (air_cost <= money) {
 					air_towers.push_back(Air_Tower(air_tower_texture, b_menu_vec[0].get_place()->get_x(), b_menu_vec[0].get_place()->get_y()));
 					money -= air_cost;
 					is_money_changed = true;
@@ -219,7 +219,7 @@ void Game::run_level(std::string &level_file) {
 				}
 			}
 			else if (b_menu_vec[0].third_pressed(mouse_x, mouse_y)) {
-				if (uni_cost < money) {
+				if (uni_cost <= money) {
 					uni_towers.push_back(Uni_Tower(uni_tower_texture, b_menu_vec[0].get_place()->get_x(), b_menu_vec[0].get_place()->get_y()));
 					money -= uni_cost;
 					is_money_changed = true;
@@ -269,26 +269,33 @@ void Game::run_level(std::string &level_file) {
 		}
 		delete active_uni;
 
-		for (int i = 0; i < active_ground.size(); i++)
+		for (int i = 0; i < active_ground.size(); i++) {
 			if (active_ground[i]->death()) {
 				active_ground.erase(active_ground.begin() + i);
+				i--;
 				n_of_deathes++;
 			}
+		}
 		for (int i = 0; i < active_air.size(); i++)
 			if (active_air[i]->death()) {
 				active_air.erase(active_air.begin() + i);
+				i--;
 				n_of_deathes++;
 			}
-		for (Monster* monster : active_ground)
-			if (!monster->is_near_castle)
-				monster->update_position(&roads, elapsed_time);
-			else
-				castle.get_damage(*monster);
-		for (Monster* monster : active_air)
-			if (!monster->is_near_castle)
-				monster->update_position(&roads, elapsed_time);
-			else
-				castle.get_damage(*monster);
+		for (int i = 0; i < active_ground.size(); i++)
+			if (!active_ground[i]->is_near_castle)
+				active_ground[i]->update_position(&roads, elapsed_time);
+			else {
+				castle.get_damage(*active_ground[i]);
+				active_ground.erase(active_ground.begin() + i);
+			}
+		for (int i = 0; i < active_air.size(); i++)
+			if (!active_air[i]->is_near_castle)
+				active_air[i]->update_position(&roads, elapsed_time);
+			else {
+				castle.get_damage(*active_air[i]);
+				active_air.erase(active_air.begin() + i);
+			}
 
 		if (castle.death()) {
 			is_victory = false;

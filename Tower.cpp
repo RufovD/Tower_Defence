@@ -34,16 +34,18 @@ void Tower::make_damage() {
 
 void Tower::target_check() {
 	if (target != nullptr) {
-		if ((target->get_hp() <= 0) || ((x - target->get_x()) * (x - target->get_x()) + (y - target->get_y()) * (y - target->get_y())) > damage_radius * damage_radius)
+		if (target->death() || (x - target->get_x()) * (x - target->get_x()) + (y - target->get_y()) * (y - target->get_y()) > damage_radius * damage_radius)
 			target = nullptr;
 	};
 };
 
-void Tower::reloading(double time) {
+void Tower::reloading(float time) {
 	if (is_loaded == false) {
 		cringe_time += time;
-		if (cringe_time >= reloading_time)
+		if (cringe_time >= reloading_time) {
 			is_loaded = true;
+			cringe_time = 0;
+		}
 	};
 };
 

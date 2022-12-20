@@ -21,7 +21,7 @@ public:
 	void choose_target(std::deque<Monster*>& active_monsters);
 	void make_damage();
 	void target_check();
-	void reloading(double time); 
+	void reloading(float time); 
 	void draw(sf::RenderWindow& window);
 	int cost;
 };
