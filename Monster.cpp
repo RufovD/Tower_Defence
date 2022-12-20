@@ -1,7 +1,5 @@
 #include "Monster.h"
 
-
-
 Monster::Monster(const sf::Texture& tex, char type, int hp, int v, int x, int y, int damage_value, int reward) : type(type), hp(hp), v(v), x(x - 28), y(y - 31), damage_value(damage_value),
 reward(reward), is_alive(true), direction('r') {
     this->is_near_castle = false;
@@ -121,4 +119,9 @@ void Monster::update_position(std::vector<Road>* roads, float time) {
 
 void Monster::draw(sf::RenderWindow& window) {
     window.draw(sprite);
+    sf::RectangleShape rectangle;
+    rectangle.setSize(sf::Vector2f(hp, 10));
+    rectangle.setOutlineColor(sf::Color::Red);
+    rectangle.setPosition(x, y);
+    window.draw(rectangle);
 }

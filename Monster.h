@@ -30,7 +30,7 @@ public:
 
     void update_position(std::vector<Road>* roads, float time);
 
-    void go(std::vector<Road> *roads, unsigned int n); //указатель на массив дорог и число элементов массива
+    //void go(std::vector<Road> *roads, unsigned int n); //указатель на массив дорог и число элементов массива
     void draw(sf::RenderWindow& window);
 };
 
