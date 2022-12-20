@@ -7,8 +7,8 @@
 4) y_roads:
 200 200 800 800 500
 5) monsters_time: (в секундах)
-0 10
+2 10 10.2 10.4 12 12.4 13
 6) monsters_type:
-Spider Bat 
+Spider Bat Bat Bat Spider Spider Spider
 7) start_money:
 500
