@@ -121,7 +121,7 @@ void Monster::draw(sf::RenderWindow& window) {
     window.draw(sprite);
     sf::RectangleShape rectangle;
     rectangle.setSize(sf::Vector2f(hp, 10));
-    rectangle.setOutlineColor(sf::Color::Red);
+    rectangle.setFillColor(sf::Color::Red);
     rectangle.setPosition(x, y);
     window.draw(rectangle);
 }

@@ -15,7 +15,6 @@ private:
 	int damage_radius;
 	int damage_value;
 	Monster* target;
-	int cost;
 
 public:
 	Tower(const sf::Texture& tex, int x, int y, double reloading_time, int damage_radius, int damage_value, int cost);
@@ -24,6 +23,6 @@ public:
 	void target_check();
 	void reloading(double time); 
 	void draw(sf::RenderWindow& window);
-	//Builing_place destroy();
+	int cost;
 };
 

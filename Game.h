@@ -14,11 +14,13 @@ private:
 	sf::VideoMode video_mode;
 	bool is_main_menu; //запущено ли главное меню
 	bool is_building_menu; //запущено ли строительное меню
+	bool is_victory; //
 
 	void init_variables(); // ??? инициализирует основные переменные игры (что? какие?) 
 	void init_window();
 	void run_main_menu(sf::RenderWindow &window);
 	void run_level(std::string &level_file);
+	void end_game(bool is_victory);
 
 public:
 	std::string curr_level; //запускаемый уровень
