@@ -6,8 +6,6 @@ class Button /* : public sf::Drawable*/ { // ??? возникают проблемы с конструкто
 private:
 	sf::Texture texture;
 	sf::Sprite sprite;
-
-public:
 	int x, y; //координаты левого верхнего края
 	int width, height; //длина и ширина 
 	bool is_clickable; //можно ли нажать кнопку
@@ -15,9 +13,12 @@ public:
 	bool is_pressed; //нажата ли кнопка
 	std::string level_file;
 
+public:
 	Button(int x, int y, int width, int height, bool is_clickable,
 		   std::string &texture_file, std::string &level_file);
 
+	bool cursor_on_the_button(int cursor_x, int cursor_y);
+	std::string pressing();
 	void update();
 	void draw(sf::RenderWindow& window);
 };

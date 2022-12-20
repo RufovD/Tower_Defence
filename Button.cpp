@@ -15,7 +15,18 @@ Button::Button(int x, int y, int width, int height, bool is_clickable,
 	image.loadFromFile("Images/" + texture_file);
 	this->texture.loadFromImage(image);
 	this->sprite.setTexture(this->texture);
-	this->sprite.setTextureRect(sf::IntRect(x, y, width, height)); // ??? переделать 
+	this->sprite.setTextureRect(sf::IntRect(0, 0, width, height)); // ??? переделать 
+	this->sprite.setPosition(x, y);
+}
+
+bool Button::cursor_on_the_button(int cursor_x, int cursor_y) {
+	return (is_clickable && (cursor_x >= x) && (cursor_x <= x + width) && 
+		(cursor_y >= y) && (cursor_y <= y + height));
+}
+
+std::string Button::pressing() {
+	is_pressed = true;
+	return level_file;
 }
 
 void Button::update() {
